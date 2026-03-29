@@ -13,7 +13,8 @@ import {
   Plus, 
   Calendar,
   ChevronRight,
-  User as UserIcon
+  User as UserIcon,
+  Flame
 } from 'lucide-react';
 
 // Components
@@ -21,6 +22,7 @@ import Dashboard from './components/Dashboard';
 import TaskList from './components/TaskList';
 import FinanceTracker from './components/FinanceTracker';
 import VisionBoard from './components/VisionBoard';
+import HabitTracker from './components/HabitTracker';
 import AIBuilder from './components/AIBuilder';
 import Settings from './components/Settings';
 
@@ -110,6 +112,7 @@ export default function App() {
   const tabs = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'tasks', label: 'Tasks', icon: CheckSquare },
+    { id: 'habits', label: 'Habits', icon: Flame },
     { id: 'finance', label: 'Finance', icon: Wallet },
     { id: 'vision', label: 'Vision', icon: Target },
     { id: 'ai', label: 'AI Builder', icon: Sparkles },
@@ -146,7 +149,7 @@ export default function App() {
 
         <div className="mt-auto pt-6 border-t border-[#1a1a1a]/5">
           <div className="flex items-center gap-3 mb-6 px-2">
-            <img src={profile?.photoURL || ''} className="w-10 h-10 rounded-full bg-[#5A5A40]/10" alt="Profile" />
+            <img src={profile?.photoURL || undefined} className="w-10 h-10 rounded-full bg-[#5A5A40]/10" alt="Profile" />
             <div className="flex-1 min-w-0">
               <p className="text-sm font-bold truncate">{profile?.displayName}</p>
               <p className="text-xs text-[#5A5A40]/60 truncate">{profile?.email}</p>
@@ -168,7 +171,7 @@ export default function App() {
           <Sparkles className="text-[#5A5A40] w-6 h-6" />
           <span className="font-serif text-xl font-bold">Life OS</span>
         </div>
-        <img src={profile?.photoURL || ''} className="w-10 h-10 rounded-full" alt="Profile" />
+        <img src={profile?.photoURL || undefined} className="w-10 h-10 rounded-full" alt="Profile" />
       </header>
 
       {/* Main Content */}
@@ -182,8 +185,9 @@ export default function App() {
             transition={{ duration: 0.2 }}
           >
             {activeTab === 'dashboard' && <Dashboard profile={profile} />}
-            {activeTab === 'tasks' && <TaskList />}
-            {activeTab === 'finance' && <FinanceTracker />}
+            {activeTab === 'tasks' && <TaskList profile={profile} />}
+            {activeTab === 'habits' && <HabitTracker profile={profile} />}
+            {activeTab === 'finance' && <FinanceTracker profile={profile} />}
             {activeTab === 'vision' && <VisionBoard />}
             {activeTab === 'ai' && <AIBuilder />}
             {activeTab === 'settings' && <Settings profile={profile} />}

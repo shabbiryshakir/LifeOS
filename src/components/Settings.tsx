@@ -112,10 +112,27 @@ export default function Settings({ profile }: SettingsProps) {
               <h3 className="font-serif text-2xl font-bold">GitHub Repository</h3>
             </div>
             <p className="text-white/60 text-sm leading-relaxed">
-              To upload this project to your GitHub, use the <strong>"Export to GitHub"</strong> feature in the AI Studio settings menu. This will create a repository with all the source code, including the Firebase integration.
+              To upload this project to your GitHub, use the <strong>"Export to GitHub"</strong> feature in the AI Studio settings menu.
             </p>
+            
+
             <div className="pt-4 border-t border-white/10">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2">Instructions</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2">GitHub Pages Troubleshooting</p>
+              <div className="space-y-4 text-xs text-white/60">
+                <p>If your <strong>public</strong> repository is not showing on GitHub Pages:</p>
+                <ul className="list-disc ml-4 space-y-2">
+                  <li>
+                    <strong className="text-white">Build Action:</strong> Since this is a Vite app, you need a GitHub Action to build it. Go to <strong>Settings &gt; Pages</strong> and set "Build and deployment" source to <strong>"GitHub Actions"</strong>.
+                  </li>
+                  <li>
+                    <strong className="text-white">Base Path:</strong> If your URL is <code>username.github.io/repo-name/</code>, you must set <code>base: '/repo-name/'</code> in <code>vite.config.ts</code>.
+                  </li>
+                  <li>
+                    <strong className="text-white">Vercel (Recommended):</strong> For the easiest experience, connect your repo to <a href="https://vercel.com" target="_blank" className="underline">Vercel</a>. It handles Vite builds automatically for free.
+                  </li>
+                </ul>
+              </div>
+            </div>
               <ol className="text-xs text-white/60 space-y-2 list-decimal ml-4">
                 <li>Open the <strong>Settings</strong> menu in AI Studio (top right).</li>
                 <li>Select <strong>"Export to GitHub"</strong>.</li>
@@ -123,9 +140,8 @@ export default function Settings({ profile }: SettingsProps) {
                 <li>Your "Life OS" will be live on GitHub!</li>
               </ol>
             </div>
-          </div>
-        </section>
-      </div>
+          </section>
+        </div>
 
       <div className="flex justify-center pt-8">
         <button 

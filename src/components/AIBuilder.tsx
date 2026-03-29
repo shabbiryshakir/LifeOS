@@ -36,7 +36,10 @@ export default function AIBuilder() {
         {
           "type": "counter" | "list" | "finance" | "countdown" | "custom",
           "title": "A descriptive title",
-          "config": { ... dynamic properties based on the type ... },
+          "config": { 
+            ... dynamic properties based on the type ... 
+            "settings": { "allowEdit": true, "showHistory": false } // Optional advanced settings
+          },
           "order": 10
         }
         

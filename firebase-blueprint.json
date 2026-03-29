@@ -37,9 +37,34 @@
         "category": { "type": "string", "enum": ["Urgent", "Leisure", "Chores"], "description": "The task category." },
         "status": { "type": "string", "enum": ["pending", "completed"], "description": "The task status." },
         "dueDate": { "type": "string", "format": "date-time", "description": "The task due date." },
-        "recurring": { "type": "string", "description": "Recurring schedule (e.g., 'daily')." }
+        "recurring": { "type": "string", "description": "Recurring schedule (e.g., 'daily')." },
+        "assigneeId": { "type": "string", "description": "The UID of the assigned user." },
+        "assigneeName": { "type": "string", "description": "The name of the assigned user." }
       },
       "required": ["id", "title", "category", "status"]
+    },
+    "Budget": {
+      "title": "Budget",
+      "description": "A budget limit for a specific category.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique budget ID." },
+        "category": { "type": "string", "description": "The category name." },
+        "limit": { "type": "number", "description": "The budget limit amount." },
+        "period": { "type": "string", "enum": ["monthly", "weekly"], "description": "The budget period." }
+      },
+      "required": ["id", "category", "limit", "period"]
+    },
+    "AppSettings": {
+      "title": "App Settings",
+      "description": "Global application settings like trip countdowns.",
+      "type": "object",
+      "properties": {
+        "tripTitle": { "type": "string", "description": "The title of the next trip." },
+        "tripDate": { "type": "string", "format": "date-time", "description": "The date of the next trip." },
+        "tripDescription": { "type": "string", "description": "A brief description of the trip." }
+      },
+      "required": ["tripTitle", "tripDate"]
     },
     "Finance": {
       "title": "Finance",
@@ -67,6 +92,43 @@
         "imageUrl": { "type": "string", "format": "uri", "description": "An image URL for the vision board." }
       },
       "required": ["id", "title"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "A dynamic category for tasks or finances.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique category ID." },
+        "name": { "type": "string", "description": "The category name." },
+        "color": { "type": "string", "description": "The category color." },
+        "type": { "type": "string", "enum": ["task", "finance"], "description": "The category type." }
+      },
+      "required": ["name"]
+    },
+    "Habit": {
+      "title": "Habit",
+      "description": "A daily habit to track.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique habit ID." },
+        "title": { "type": "string", "description": "The habit title." },
+        "frequency": { "type": "string", "enum": ["daily", "weekly"], "description": "The habit frequency." },
+        "targetCount": { "type": "integer", "description": "The daily target count." },
+        "color": { "type": "string", "description": "The habit color." }
+      },
+      "required": ["id", "title"]
+    },
+    "HabitLog": {
+      "title": "Habit Log",
+      "description": "A daily log for a habit.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique log ID." },
+        "habitId": { "type": "string", "description": "The habit ID." },
+        "date": { "type": "string", "format": "date", "description": "The log date." },
+        "count": { "type": "integer", "description": "The completed count." }
+      },
+      "required": ["habitId", "date", "count"]
     }
   },
   "firestore": {
@@ -74,6 +136,11 @@
     "widgets/{widgetId}": { "schema": "Widget", "description": "Dynamic widget configurations." },
     "tasks/{taskId}": { "schema": "Task", "description": "Shared task documents." },
     "finances/{financeId}": { "schema": "Finance", "description": "Shared finance entries." },
-    "vision_goals/{goalId}": { "schema": "VisionGoal", "description": "Shared vision board items." }
+    "budgets/{budgetId}": { "schema": "Budget", "description": "Shared budget limits." },
+    "visionGoals/{goalId}": { "schema": "VisionGoal", "description": "Shared vision board items." },
+    "settings/global": { "schema": "AppSettings", "description": "Global application settings." },
+    "categories/{categoryId}": { "schema": "Category", "description": "Shared categories." },
+    "habits/{habitId}": { "schema": "Habit", "description": "Shared habits." },
+    "habitLogs/{logId}": { "schema": "HabitLog", "description": "Shared habit logs." }
   }
 }

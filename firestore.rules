@@ -20,7 +20,7 @@ service cloud.firestore {
     // Document ID: financeId
     // Fields: id, amount, category, description, date, type
     //
-    // Collection: vision_goals
+    // Collection: visionGoals
     // Document ID: goalId
     // Fields: id, title, description, targetDate, imageUrl
     // ===============================================================
@@ -122,11 +122,40 @@ service cloud.firestore {
       allow delete: if isAuthenticated();
     }
 
-    match /vision_goals/{goalId} {
+    match /visionGoals/{goalId} {
       allow read: if isAuthenticated();
       allow create: if isAuthenticated() && isValidVisionGoal(request.resource.data);
       allow update: if isAuthenticated() && isValidVisionGoal(request.resource.data);
       allow delete: if isAuthenticated();
+    }
+
+    match /budgets/{budgetId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAuthenticated();
+      allow delete: if isAuthenticated();
+    }
+
+    match /categories/{categoryId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAuthenticated();
+      allow delete: if isAuthenticated();
+    }
+
+    match /habits/{habitId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAuthenticated();
+      allow delete: if isAuthenticated();
+    }
+
+    match /habitLogs/{logId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAuthenticated();
+      allow delete: if isAuthenticated();
+    }
+
+    match /settings/{settingId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAuthenticated();
     }
   }
 }

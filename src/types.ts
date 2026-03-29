@@ -22,10 +22,13 @@ export interface Widget {
 export interface Task {
   id: string;
   title: string;
-  category: 'Urgent' | 'Leisure' | 'Chores';
+  category: string;
   status: 'pending' | 'completed';
   dueDate?: string;
   recurring?: string;
+  assigneeId?: string;
+  assigneeName?: string;
+  visionGoalId?: string;
 }
 
 export interface FinanceEntry {
@@ -37,10 +40,48 @@ export interface FinanceEntry {
   type: 'expense' | 'income';
 }
 
+export interface Budget {
+  id: string;
+  category: string;
+  limit: number;
+  period: 'monthly' | 'weekly';
+}
+
 export interface VisionGoal {
   id: string;
   title: string;
   description?: string;
   targetDate?: string;
   imageUrl?: string;
+  status: 'active' | 'completed' | 'archived';
+}
+
+export interface Habit {
+  id: string;
+  title: string;
+  description?: string;
+  frequency: 'daily' | 'weekly';
+  targetCount: number;
+  color: string;
+  createdAt: string;
+}
+
+export interface HabitLog {
+  id: string;
+  habitId: string;
+  date: string;
+  count: number;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  color: string;
+  type: 'task' | 'finance';
+}
+
+export interface AppSettings {
+  tripTitle: string;
+  tripDate: string;
+  tripDescription?: string;
 }
