@@ -8,10 +8,10 @@ import {
   Wallet, 
   Target, 
   Sparkles, 
-  Settings as SettingsIcon, 
-  LogOut, 
-  Plus, 
-  Calendar,
+  Settings as SettingsIcon,
+  LogOut,
+  Plus,
+  Calendar as CalendarIcon,
   ChevronRight,
   User as UserIcon,
   Flame
@@ -25,6 +25,7 @@ import VisionBoard from './components/VisionBoard';
 import HabitTracker from './components/HabitTracker';
 import AIBuilder from './components/AIBuilder';
 import Settings from './components/Settings';
+import CalendarView from './components/Calendar';
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -111,6 +112,7 @@ export default function App() {
 
   const tabs = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'calendar', label: 'Calendar', icon: CalendarIcon },
     { id: 'tasks', label: 'Tasks', icon: CheckSquare },
     { id: 'habits', label: 'Habits', icon: Flame },
     { id: 'finance', label: 'Finance', icon: Wallet },
@@ -185,6 +187,7 @@ export default function App() {
             transition={{ duration: 0.2 }}
           >
             {activeTab === 'dashboard' && <Dashboard profile={profile} />}
+            {activeTab === 'calendar' && <CalendarView profile={profile} />}
             {activeTab === 'tasks' && <TaskList profile={profile} />}
             {activeTab === 'habits' && <HabitTracker profile={profile} />}
             {activeTab === 'finance' && <FinanceTracker profile={profile} />}
